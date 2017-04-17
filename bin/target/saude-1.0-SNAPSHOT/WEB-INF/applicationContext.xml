@@ -1,0 +1,43 @@
+
+
+<beans:beans xmlns="http://www.springframework.org/schema/security" 
+             xmlns:beans="http://www.springframework.org/schema/beans" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+             xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+            http://www.springframework.org/schema/security 
+            http://www.springframework.org/schema/security/spring-security-3.1.xsd"> 
+             
+     <beans:bean id="login"
+                class="org.springframework.jdbc.datasource.DriverManagerDataSource"/>
+    
+    <http pattern="/javax.faces.resource/**" security="none"></http>
+    <http auto-config="true" use-expressions="true" access-denied-page="/negado.xhtml">
+        
+         <form-login login-page="/Login.xhtml" 
+                    authentication-failure-url="/Login.xhtml" />
+        <intercept-url pattern="/Home.xhtml" access="isAuthenticated()" /> 
+        <intercept-url pattern="/agendamento/**" access="hasAnyRole('RECEPCAO','MEDICO', 'ENFERMAGEM')" /> 
+        <intercept-url pattern="/cidade/**" access="hasAnyRole('RECEPCAO','ENFERMAGEM')" /> 
+        <intercept-url pattern="/consulta/**" access="hasAnyRole('MEDICO','ENFERMAGEM')" /> 
+        <intercept-url pattern="/entradaMedicamento/**" access="hasAnyRole('ENFERMAGEM')" /> 
+        <intercept-url pattern="/estado/**" access="hasAnyRole('RECEPCAO','ENFERMAGEM')" /> 
+        <intercept-url pattern="/exame/**" access="hasAnyRole('MEDICO','ENFERMAGEM')" /> 
+        <intercept-url pattern="/funcionario/**" access="hasAnyRole('MEDICO','ENFERMAGEM')" /> 
+        <intercept-url pattern="/medicamento/**" access="hasAnyRole('MEDICO','ENFERMAGEM')" /> 
+        <intercept-url pattern="/paciente/**" access="hasAnyRole('MEDICO')" /> 
+        <intercept-url pattern="/saidaMedicamento/**" access="hasAnyRole('MEDICO')" /> 
+        <intercept-url pattern="/usuario/**" access="hasAnyRole('MEDICO')" />
+    </http> 
+
+ 	 
+  <authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service 
+                data-source-ref="login" 
+                users-by-username-query=""
+                authorities-by-username-query=""/>
+            <password-encoder hash="md5"/> 
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans> 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+        <ui:define name="titulo">#{estadoControle.editando ? 'Edição de Estado' : 'Novo Estado'}</ui:define>
+        <ui:define name="corpo">
+
+            <h:form>
+                <h1>#{estadoControle.editando ? 'Edição de Estado' : 'Novo Estado'}</h1>
+
+                <p:toolbar style="margin-top: 20px">
+                    <p:toolbarGroup>
+                        <p:button value="Cancelar" outcome="/estado/pesquisa"  icon="ui-icon-close"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup>
+                        <p:button value="Pesquisa" outcome="/estado/pesquisa" icon="ui-icon-search"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup align="right">
+                        <p:commandButton value="Salvar"  action="#{estadoControle.salvar()}"
+                                         id="btsalvar" icon="ui-icon-disk" ajax="false"/>
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+
+                <p:panelGrid columns="2" id="painelEstado" style="width: 100%; margin-top: 20px">
+
+                    <p:outputLabel for="id" value="ID:"/>
+                    <p:inputText id="id"  value="#{estadoControle.estado.id}"
+                                 size="20" maxlength="20" disabled="true"/>
+
+                    <p:outputLabel for="nome" value="Nome:"/>
+                    <p:inputText id="nome"  size="80" maxlength="80" value="#{estadoControle.estado.nome}"
+                                 required="true" requiredMessage="O campo nome do Estado é obrigatório"/>
+
+                    <p:outputLabel for="sigla" value="Sigla:"/>
+                    <p:inputText id="sigla"  size="20" maxlength="80" value="#{estadoControle.estado.sigla}"
+                                 required="true" requiredMessage="O campo Sigla é obrigatório"/>
+
+ 
+
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+
+
+    </ui:composition>
+</html>

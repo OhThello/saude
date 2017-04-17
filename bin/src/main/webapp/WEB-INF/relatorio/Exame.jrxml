@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Exame" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0d48d3b1-3bca-4b27-a003-c3c4f597374c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     exame."tipoexame" AS exame_tipoexame,
+     paciente."numeroprotuario" AS paciente_numeroprotuario,
+     pessoa."nome" AS pessoa_nome,
+     exame."data" AS exame_data,
+     exame."horario" AS exame_horario,
+     exame."id" AS exame_id
+FROM
+     "public"."paciente" paciente INNER JOIN "public"."exame" exame ON paciente."pessoa_id" = exame."paciente_pessoa_id"
+     INNER JOIN "public"."pessoa" pessoa ON paciente."pessoa_id" = pessoa."pessoa_id"]]>
+	</queryString>
+	<field name="exame_id" class="java.lang.Long"/>
+	<field name="exame_data" class="java.sql.Date"/>
+	<field name="paciente_numeroprotuario" class="java.lang.String"/>
+	<field name="pessoa_nome" class="java.lang.String"/>
+	<field name="exame_tipoexame" class="java.lang.String"/>
+	<field name="exame_horario" class="java.sql.Time"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="119" splitType="Stretch">
+			<staticText>
+				<reportElement x="-3" y="43" width="553" height="20" uuid="67136a47-ba7f-4191-86ee-6732b3523fda"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Terra Rica - Paraná]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="63" width="555" height="20" uuid="2b236e2b-60cc-4b82-ade4-1e2d5f025d69"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Telefone: (44) 3441-2210]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-3" y="23" width="555" height="20" uuid="e55a4c0f-894d-406e-83a6-fae0a891f22e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Avenida Rio Grande do Sul ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Title" x="-3" y="83" width="555" height="33" uuid="225667d9-64c5-464d-bd9d-3965b10c6c48"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Relatório de Exame]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="-3" y="0" width="555" height="25" forecolor="#000000" uuid="afcbd4de-9580-4528-b7a8-a93858c916be"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidade de atenção Primaria de Saúde da Família]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="23d752e3-3dae-4db0-8df9-cf0a1ccf6e5e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="49" height="15" uuid="c06613c0-8fac-42b3-8ba0-1182ff3ac971"/>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="49" y="19" width="62" height="15" uuid="da430957-675d-4d8c-8245-8a6a5c8170dc"/>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="111" y="19" width="74" height="15" uuid="2c78978a-8310-4ea8-a40e-6b0669b82892"/>
+				<text><![CDATA[Prontuário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="185" y="19" width="183" height="15" uuid="b70e6e0c-324f-4720-96c3-a798aefb0fe2"/>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="368" y="19" width="135" height="15" uuid="2177f625-a6a8-46ca-8405-219e5e6bd2ed"/>
+				<text><![CDATA[Tipo Exame]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="503" y="19" width="49" height="15" uuid="cf41e804-25ea-4b53-aeef-4f5516d76395"/>
+				<text><![CDATA[Horário]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="f92971f8-7ca9-47aa-8150-3cadd096a16a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="49" height="15" uuid="3680f1e3-5dc1-4882-bd30-97995beba244"/>
+				<textFieldExpression><![CDATA[$F{exame_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement style="Detail" x="49" y="0" width="62" height="15" uuid="033b339c-f7b8-4ef4-85de-3c678487a861"/>
+				<textFieldExpression><![CDATA[$F{exame_data}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="111" y="0" width="74" height="15" uuid="77ccbc93-81e2-4c43-aa49-dba6f4d5fdc2"/>
+				<textFieldExpression><![CDATA[$F{paciente_numeroprotuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="185" y="0" width="183" height="15" uuid="3b9bafb7-3f27-40af-bd68-f4aa6a88bf0e"/>
+				<textFieldExpression><![CDATA[$F{pessoa_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="368" y="0" width="135" height="15" uuid="148278d0-2bb0-4f9d-b329-ac395440aba3"/>
+				<textFieldExpression><![CDATA[$F{exame_tipoexame}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement style="Detail" x="503" y="0" width="49" height="15" uuid="18fb4cc5-c3e2-4a31-8b76-dec75610dba4"/>
+				<textFieldExpression><![CDATA[$F{exame_horario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="faaeda8c-8237-4d28-b8fa-1972944af22f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="05e7622a-08f8-403f-b42c-f86d949c285b"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="5e67a167-73d7-40c4-a003-c5eb5b926025"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="5c24ac03-6baa-4569-8aef-84516854bc7b"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

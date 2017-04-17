@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="funcionario" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8ce20fea-5464-49f8-8c11-1c59ff89dc7e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     funcionario."dataadmissao" AS funcionario_dataadmissao,
+     funcionario."setor" AS funcionario_setor,
+     pessoa."pessoa_id" AS pessoa_pessoa_id,
+     pessoa."nome" AS pessoa_nome,
+     pessoa."telefone" AS pessoa_telefone
+FROM
+     "public"."pessoa" pessoa INNER JOIN "public"."funcionario" funcionario ON pessoa."pessoa_id" = funcionario."pessoa_id"]]>
+	</queryString>
+	<field name="pessoa_pessoa_id" class="java.lang.Long"/>
+	<field name="pessoa_nome" class="java.lang.String"/>
+	<field name="pessoa_telefone" class="java.lang.String"/>
+	<field name="funcionario_dataadmissao" class="java.sql.Date"/>
+	<field name="funcionario_setor" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="122" splitType="Stretch">
+			<staticText>
+				<reportElement x="-2" y="23" width="555" height="20" uuid="85d51328-c74d-43db-9503-f7e1fd6e0013"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Avenida Rio Grande do Sul ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Title" x="-2" y="86" width="555" height="33" uuid="e8dac72a-5820-409a-9de3-8ab07b373465"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Relatório de Funcionário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-2" y="66" width="555" height="20" uuid="9e322a7b-b236-4190-ba35-26e1f98d2c16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Telefone: (44) 3441-2210]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="-2" y="0" width="555" height="25" forecolor="#000000" uuid="4e6bf5fa-402e-44ed-a4b6-36650abfdf28"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidade de atenção Primaria de Saúde da Família]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="43" width="553" height="20" uuid="9d3919bc-9072-48ba-9cec-7664fcedcc27"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Terra Rica - Paraná]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="539930a2-afc9-4370-a3db-73f9f247edba"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="46" height="15" uuid="f75685dd-8d5b-4a6f-8e9b-ce48ab80ad67"/>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="46" y="19" width="163" height="15" uuid="39d80a60-ce40-4862-9521-2eec6f2a79e7"/>
+				<text><![CDATA[Funcionário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="209" y="19" width="93" height="15" uuid="60886438-366e-46f6-9cb5-455c976469d0"/>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="302" y="19" width="98" height="15" uuid="676ad607-dc10-41c7-9faf-bc1b7f2c5514"/>
+				<text><![CDATA[Data Admissão]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="400" y="19" width="155" height="15" uuid="e926ee83-de67-482c-84e1-665bfb2ea18e"/>
+				<text><![CDATA[Setor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="65f9f69a-761b-46e3-9443-f2215e57f616"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="46" height="15" uuid="bc061b1e-ccc0-4ce6-96e3-21849e17c0d3"/>
+				<textFieldExpression><![CDATA[$F{pessoa_pessoa_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="46" y="0" width="163" height="15" uuid="bde9948b-6937-44d9-8e47-a90494a80969"/>
+				<textFieldExpression><![CDATA[$F{pessoa_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="209" y="0" width="93" height="15" uuid="73f8fe25-7244-4379-9110-9cb6228e7d1d"/>
+				<textFieldExpression><![CDATA[$F{pessoa_telefone}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement style="Detail" x="302" y="0" width="98" height="15" uuid="ab9fbf25-6646-4d4c-8592-d37fe5c7d75b"/>
+				<textFieldExpression><![CDATA[$F{funcionario_dataadmissao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="400" y="0" width="155" height="15" uuid="80960ee0-6824-4b53-a237-5b7e20cb46c9"/>
+				<textFieldExpression><![CDATA[$F{funcionario_setor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="4a175ee4-4208-4557-b091-3d07241cfde3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="dfa82ce2-31d2-44e8-9088-25cf7a8a1618"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="b0ea7702-91dd-4774-9819-5f3c269e257b"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="a5662767-9de1-4fd1-8097-78076f9c0aa3"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

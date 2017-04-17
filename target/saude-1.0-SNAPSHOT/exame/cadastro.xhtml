@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+        <ui:define name="titulo">#{exameControle.editando ? 'Edição de Exame' : 'Novo Exame'}</ui:define>
+        <ui:define name="corpo">
+
+            <h:form>
+                <h1>#{exameControle.editando ? 'Edição de Exame' : 'Novo Exame'}</h1>
+
+                <p:toolbar style="margin-top: 20px">
+                    <p:toolbarGroup>
+                        <p:button value="Cancelar" outcome="/exame/pesquisa"  icon="ui-icon-close"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup>
+                        <p:button value="Pesquisa" outcome="/exame/pesquisa" icon="ui-icon-search"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup align="right">
+                        <p:commandButton value="Salvar"  action="#{exameControle.salvar()}"
+                                         id="btsalvar" icon="ui-icon-disk" ajax="false"/>
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+
+                <p:panelGrid columns="2" id="painelExame" style="width: 100%; margin-top: 20px">
+
+                    <p:outputLabel for="id" value="ID:"/>
+                    <p:inputText id="id"  value="#{exameControle.exame.id}"
+                                 size="20" maxlength="20" disabled="true"/>
+
+                    <p:outputLabel for="data" value="Data:"/>
+                    <p:calendar id="data" value="#{exameControle.exame.data}"
+                                required="true" requiredMessage="O campo data é obrigatório"
+                                pattern="dd/MM/yyyy"/>
+
+                    <p:outputLabel for="hora" value="Hora"/>
+                    <p:calendar id="hora" value="#{exameControle.exame.horario}" pattern="HH:mm" 
+                                timeOnly="true"  required="true" requiredMessage="O campo horario é obrigatório"/> 
+
+
+                    <p:outputLabel for="paciente" value="Paciente:"/>
+                    <p:autoComplete id="paciente" 
+                                    value="#{exameControle.exame.paciente}"
+                                    completeMethod="#{pacienteControle.autoComplete}"
+                                    var="nome"
+                                    itemLabel="#{nome.nome}"
+                                    itemValue="#{nome}"
+                                    converter="#{pacienteControle.converter()}"
+                                    queryDelay="500"
+                                    dropdown="true"
+                                    style="margin-right: 30px;"
+                                    required="true" requiredMessage="O campo Paciente é obrigatório"/>
+
+                    <p:outputLabel for="tipo" value="Tipo Exame:"/>
+                    <p:selectOneMenu id="tipo" value="#{exameControle.exame.tipoExame}"
+                                     required="true" requiredMessage="O campo tipo de exame é obrigatório">
+                        <f:selectItems value="#{exameControle.tipoExame}"
+                                       var="agenda"
+                                       itemLabel="#{agenda.descricao}"
+                                       itemValue="#{agenda}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="laudo" value="Laudo:"/>
+                    <p:inputText id="laudo"  size="80" maxlength="80" value="#{exameControle.exame.laudo}"
+                                 required="true" requiredMessage="O campo laudo é obrigatório"/>
+
+                    <p:outputLabel for="status" value="Status:"/>
+                    <p:inputText id="status"  size="80" maxlength="80" value="#{exameControle.exame.status}"
+                                 required="true" requiredMessage="O campo status é obrigatório"/>
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+
+
+    </ui:composition>
+</html>

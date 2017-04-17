@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+        <ui:define name="titulo">#{usuarioControle.editando ? 'Edição de Usuário' : 'Novo Usuário'}</ui:define>
+        <ui:define name="corpo">
+
+            <h:form>
+                <h1>#{usuarioControle.editando ? 'Edição de Usuário' : 'Novo Usuário'}</h1>
+
+                <p:toolbar style="margin-top: 20px">
+                    <p:toolbarGroup>
+                        <p:button value="Cancelar" outcome="/Home"  icon="ui-icon-close"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup align="right">
+                        <p:commandButton value="Salvar"  action="#{usuarioControle.salvar()}"
+                                         id="btsalvar" icon="ui-icon-disk" ajax="false"/>
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+
+                <p:panelGrid columns="2" id="painelCidade" style="width: 100%; margin-top: 20px">
+
+                    <p:outputLabel for="id" value="ID:"/>
+                    <p:inputText id="id"  value="#{categoriaControle.categoria.id}"
+                                 size="20" maxlength="20" disabled="true"/>
+
+                    
+                    <p:outputLabel for="funcionario" value="Colaborador:"/>
+                    <p:autoComplete id="funcionario" 
+                                    value="#{usuarioControle.usuario.funcionario}"
+                                    completeMethod="#{funcionarioControle.autoComplete}"
+                                    var="fun"
+                                    itemLabel="#{fun.nome}"
+                                    itemValue="#{fun}"
+                                    converter="#{funcionarioControle.converter()}"
+                                    queryDelay="500"
+                                    dropdown="true"
+                                    style="margin-right: 30px;"/>
+
+                    <p:outputLabel for="user" value="Nome do Usuário:"/>
+                    <p:inputText id="user"  size="80" maxlength="80" value="#{usuarioControle.usuario.nome}"
+                                 required="true" requiredMessage="O campo nome é obrigatório"/>
+
+                    <p:outputLabel for="email" value="E-mail:"/>
+                    <p:inputText id="email"  size="80" maxlength="80" value="#{usuarioControle.usuario.email}"
+                                 required="true" requiredMessage="O campo E-mail é obrigatório"/>
+
+                    <p:outputLabel for="senha" value="Senha:"/>
+                    <p:password id="senha" value="#{usuarioControle.usuario.senha}"/>
+                    
+                
+
+                    <p:outputLabel for="permissao" value="Permissão:"/>
+                    <p:selectOneMenu id="permissao" 
+                                     value="#{usuarioControle.usuario.permissaoUsuario}">
+
+                        <f:selectItems value="#{usuarioControle.permissoes}"
+                                       var="perm"
+                                       itemLabel="#{perm.descricao}"
+                                       itemValue="#{perm}"/>
+                    </p:selectOneMenu>
+
+
+
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+
+
+    </ui:composition>
+</html>
+
+

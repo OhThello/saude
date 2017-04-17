@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+        <ui:define name="titulo">#{consultaControle.editando ? 'Edição de Consulta' : 'Nova Consulta'}</ui:define>
+        <ui:define name="corpo">
+
+            <h:form>
+                <h1>#{consultaControle.editando ? 'Edição de Consulta' : 'Nova Consulta'}</h1>
+
+                <p:toolbar style="margin-top: 20px">
+                    <p:toolbarGroup>
+                        <p:button value="Cancelar" outcome="/consulta/pesquisa"  icon="ui-icon-close"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup>
+                        <p:button value="Pesquisa" outcome="/consulta/pesquisa" icon="ui-icon-search"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup align="right">
+                        <p:commandButton value="Salvar"  action="#{consultaControle.salvar()}"
+                                         id="btsalvar" icon="ui-icon-disk" ajax="false"/>
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+
+                <p:panelGrid columns="2" id="painelConsulta" style="width: 100%; margin-top: 20px">
+
+                    <p:outputLabel for="id" value="ID:"/>
+                    <p:inputText id="id"  value="#{consultaControle.consulta.id}"
+                                 size="20" maxlength="20" disabled="true"/>
+
+                    <p:outputLabel for="data" value="Data:"/>
+                    <p:calendar id="data" value="#{consultaControle.consulta.data}"
+                                required="true" requiredMessage="O campo data é obrigatório"
+                                pattern="dd/MM/yyyy"/>
+
+
+                    <p:outputLabel for="nome" value="Paciente:"/>
+                    <p:autoComplete id="nome" 
+                                    value="#{consultaControle.consulta.paciente}"
+                                    completeMethod="#{pacienteControle.autoComplete}"
+                                    var="paciente"
+                                    itemLabel="#{paciente.nome}"
+                                    itemValue="#{paciente}"
+                                    converter="#{pacienteControle.converter()}"
+                                    queryDelay="500"
+                                    dropdown="true"
+                                    style="margin-right: 30px;"
+                                    required="true" requiredMessage="O campo paciente é obrigatório"/>
+
+
+                    <p:outputLabel for="tipo" value="Tipo de Consulta:"/>
+                    <p:selectOneMenu id="tipo" value="#{consultaControle.consulta.tipoConsulta}"
+                                     required="true" requiredMessage="O campo tipo de consulta é obrigatório">
+                        <f:selectItems value="#{consultaControle.tipoConsulta}"
+                                       var="agenda"
+                                       itemLabel="#{agenda.descricao}"
+                                       itemValue="#{agenda}"/>
+                    </p:selectOneMenu>
+
+
+                    <p:outputLabel for="observacao" value="Observação:"/>
+                    <p:inputText id="observacao"  size="80" maxlength="80" value="#{consultaControle.consulta.observacao}"
+                                 required="true" requiredMessage="O campo observação é obrigatório"/>
+
+
+                </p:panelGrid>
+
+                <p:panelGrid id="painelItem" columns="5" style="width: 100%; margin-top: 20px">
+                    <p:outputLabel for="medicamento" value="Medicamento:"/>
+                     <p:autoComplete id="medicamento" 
+                                     value="#{consultaControle.consultaItem.medicamento}"
+                                     completeMethod="#{medicamentoControle.autoComplete}"
+                                    var="remedio"
+                                    itemLabel="#{remedio.nome}"
+                                    itemValue="#{remedio}"
+                                    converter="#{medicamentoControle.converter()}"
+                                    queryDelay="500"
+                                    dropdown="true"
+                                    style="margin-right: 30px;"/>
+                    
+                    
+                    <p:outputLabel for="quantidade" value="Quantidade:"/>
+                    <p:inputText id="quantidade" value="#{consultaControle.consultaItem.quantidade}">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                    </p:inputText>
+                    
+                    <p:commandButton value="Adicionar" process="painelItem"
+                                     actionListener="#{consultaControle.adiconaMedicamento()}"
+                                     update="itensVenda painelItem"/>
+                    
+                </p:panelGrid>
+                
+                <p:dataTable id="itensVenda" value="#{consultaControle.consulta.consultaItens}"
+                             var="item" emptyMessage="Nenhum medicamento adicionado.">
+                
+                    <p:column headerText="Medicamento">
+                        #{item.medicamento.nome}
+                    </p:column>
+                    <p:column headerText="Quantidade">
+                        <h:inputText value="#{item.quantidade}">
+                            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                        </h:inputText>
+                    </p:column>
+                    <p:column headerText="Opções">
+                        <p:commandButton value="Remover"
+                                         action="#{consultaControle.removeMedicamento()}"
+                                         actionListener="#{consultaControle.setConsultaItem(item)}"
+                                         ajax="false"/>
+                    </p:column>
+                        
+                    
+                </p:dataTable>
+
+
+            </h:form>
+        </ui:define>
+
+
+    </ui:composition>
+</html>

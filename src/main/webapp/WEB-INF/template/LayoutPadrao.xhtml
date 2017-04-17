@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><ui:insert name="titulo">Unidade de Atenção Primária de Saúde da Família</ui:insert></title>
+        <h:outputStylesheet library="css" name="sistema.css" />
+    </h:head>
+
+    <h:body>
+
+        <!--MENSAGEM DE EXCLUSÃO GENÉRICA--> 
+        <h:form>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+        </h:form>
+
+        <!--FIM DA EXCLUSÃO-->
+
+        <p:ajaxStatus styleClass="ajax-status">
+            <f:facet name="start">
+                <h:graphicImage library="images" name="loading.gif"/>
+            </f:facet>
+        </p:ajaxStatus>
+
+        <header>
+            <div style="float: left">
+                <h:link outcome="/Home">
+                    <h:graphicImage library="images" name="logo.png" />
+                </h:link>
+            </div>
+
+
+            <p:growl id="growl"/>  
+
+            <div style="float: right; margin-right: 110px">
+                
+
+                <h:form style="display: inline-block">
+                    <p:menubar styleClass="menu-sistema">
+                        <p:submenu label="Cadastros">
+                            <p:menuitem value="Agendamento" outcome="/agendamento/pesquisa" />
+                            <p:menuitem value="Cidade" outcome="/cidade/pesquisa" />
+                            <p:menuitem value="Estado" outcome="/estado/pesquisa" />
+                            <p:menuitem value="Exame" outcome="/exame/pesquisa" />
+                            <p:menuitem value="Funcionário" outcome="/funcionario/pesquisa" />
+                            <p:menuitem value="Medicamento" outcome="/medicamento/pesquisa" />
+                            <p:menuitem value="Paciente" outcome="/paciente/pesquisa" />
+                            <p:menuitem value="Usuário" outcome="/usuario/pesquisa" />
+                        </p:submenu>
+                        <p:submenu label="Movimento">
+                             <p:menuitem value="Consulta" outcome="/consulta/pesquisa" />
+                             <p:menuitem value="Entrada Medicamento" outcome="/entradaMedicamento/pesquisa" />
+                             <p:menuitem value="Saida Medicamento" outcome="/saidaMedicamento/pesquisa" />
+                        </p:submenu>
+                        <p:submenu label="Relatórios Cadastrais">
+                            <p:menuitem value="Agendamento" action="#{relatorioControle.gerarRelatorio('agendamento')}"
+                                        ajax="false" target="_blank"/>
+                            <p:menuitem value="Cidade" action="#{relatorioControle.gerarRelatorio('cidade')}"
+                                        ajax="false" target="_blank"/>
+                             <p:menuitem value="Estado" action="#{relatorioControle.gerarRelatorio('Estado')}"
+                                         ajax="false" target="_blank"/>
+                              <p:menuitem value="Exame" action="#{relatorioControle.gerarRelatorio('Exame')}"
+                                         ajax="false" target="_blank"/>
+                              <p:menuitem value="Funcionário" action="#{relatorioControle.gerarRelatorio('funcionario')}"
+                                         ajax="false" target="_blank"/>
+                              <p:menuitem value="Medicamento" action="#{relatorioControle.gerarRelatorio('Medicamento')}"
+                                         ajax="false" target="_blank"/>
+                              <p:menuitem value="Paciente" action="#{relatorioControle.gerarRelatorio('paciente')}"
+                                         ajax="false" target="_blank"/>
+                        </p:submenu>
+                        <p:submenu label="Relatórios Gerencial">
+                        </p:submenu>
+
+                        <p:menuitem value="Sair" url="/j_spring_security_logout"/>
+                        
+                    </p:menubar>
+                </h:form>
+            </div>
+
+
+            <!--<div style="clear: both"></div>-->
+        </header>
+
+        <div id="conteudo">
+            <ui:insert name="corpo"/>
+        </div>
+        <p:separator style="margin-top: 20px"/>
+
+        <div  align="right">
+            <footer>
+                Unidade de Atenção Primária de Saúde da Família
+            </footer>
+        </div>
+
+
+    </h:body>
+
+</html>

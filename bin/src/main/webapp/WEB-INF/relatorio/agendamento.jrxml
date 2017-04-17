@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="agendamento" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b1b7d5cb-07ba-4c4a-a99b-61c3921157c1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     agendamento."id" AS agendamento_id,
+     agendamento."data" AS agendamento_data,
+     agendamento."status" AS agendamento_status,
+     pessoa."nome" AS pessoa_nome,
+     agendamento."tipoagenda" AS agendamento_tipoagenda,
+     paciente."numeroprotuario" AS paciente_numeroprotuario
+FROM
+     "public"."paciente" paciente INNER JOIN "public"."agendamento" agendamento ON paciente."pessoa_id" = agendamento."paciente_pessoa_id"
+     INNER JOIN "public"."pessoa" pessoa ON paciente."pessoa_id" = pessoa."pessoa_id"]]>
+	</queryString>
+	<field name="agendamento_id" class="java.lang.Long"/>
+	<field name="agendamento_data" class="java.sql.Date"/>
+	<field name="pessoa_nome" class="java.lang.String"/>
+	<field name="paciente_numeroprotuario" class="java.lang.String"/>
+	<field name="agendamento_tipoagenda" class="java.lang.String"/>
+	<field name="agendamento_status" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="124" splitType="Stretch">
+			<staticText>
+				<reportElement x="-2" y="66" width="555" height="20" uuid="c7acb962-0411-4747-b7f3-023904a86c2d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Telefone: (44) 3441-2210]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="43" width="553" height="20" uuid="63426035-b6a7-4734-850f-a527c62b7f69"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Terra Rica - Paraná]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="0" y="0" width="555" height="25" forecolor="#000000" uuid="a19f3ebd-51a8-432b-a3f9-91412c4bcedc"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidade de atenção Primaria de Saúde da Família]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="23" width="555" height="20" uuid="abe700a8-c73f-4e3a-971e-9d9430012398"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Avenida Rio Grande do Sul ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Title" x="-2" y="86" width="555" height="33" uuid="6cffd88c-ffcc-4884-bad4-5b9e960f442a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Relatório de Agendamento]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="7067b4f0-5fc7-45ef-a952-735f774b4806"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="54" height="15" uuid="0673b284-a473-4b22-b793-bddadaaed921"/>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="54" y="19" width="68" height="15" uuid="e8960b05-92e8-4beb-9200-d214a94e534e"/>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="122" y="19" width="154" height="15" uuid="a0f941af-b0e4-4e8c-95e2-848bf6c116f0"/>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="276" y="19" width="129" height="15" uuid="5aa62350-0241-4dae-94ef-b408fa69da7a"/>
+				<text><![CDATA[Numero Prontuário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="405" y="19" width="78" height="15" uuid="09b6c3b8-147c-4c14-9a80-6cb3cddbccd0"/>
+				<text><![CDATA[Tipo Agenda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="483" y="19" width="69" height="15" uuid="74e842b6-e4c0-4dc1-82af-85c2090d8cfa"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="0a205599-e412-4f34-975f-78b9db9d9182"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="54" height="15" uuid="7d783380-8fbb-4df6-9754-02b8d34e191d"/>
+				<textFieldExpression><![CDATA[$F{agendamento_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement style="Detail" x="54" y="0" width="68" height="15" uuid="e7adfdc6-c3c7-4c3c-a449-46371aef98dd"/>
+				<textFieldExpression><![CDATA[$F{agendamento_data}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="122" y="0" width="154" height="15" uuid="83939d28-2b9c-474b-a6f4-5104d25e2714"/>
+				<textFieldExpression><![CDATA[$F{pessoa_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="276" y="0" width="129" height="15" uuid="f4b31e9d-9d30-4200-acef-beb7f601018b"/>
+				<textFieldExpression><![CDATA[$F{paciente_numeroprotuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="405" y="0" width="78" height="15" uuid="a569c6f7-f17a-4665-99ee-4bebb09416fa"/>
+				<textFieldExpression><![CDATA[$F{agendamento_tipoagenda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="483" y="0" width="69" height="15" uuid="ee09dd38-1be7-45df-9320-b0147c81005c"/>
+				<textFieldExpression><![CDATA[$F{agendamento_status}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="9138534f-b012-4050-b59a-bb56a7c056e6"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="eb27ecc5-a5c7-4c0d-8121-521fd007961a"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="2146347b-c25c-4ab1-a7b0-ed73cdaa8e3f"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="85643824-1dd1-4b65-9dd9-c1056832dc28"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

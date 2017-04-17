@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Medicamento" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c6477a5-5a0f-46fe-a456-22782e12c4b1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     medicamento."medicamento_id" AS medicamento_medicamento_id,
+     medicamento."controlado" AS medicamento_controlado,
+     medicamento."estoque" AS medicamento_estoque,
+     medicamento."nome" AS medicamento_nome
+FROM
+     "public"."medicamento" medicamento]]>
+	</queryString>
+	<field name="medicamento_medicamento_id" class="java.lang.Long"/>
+	<field name="medicamento_nome" class="java.lang.String"/>
+	<field name="medicamento_controlado" class="java.lang.String"/>
+	<field name="medicamento_estoque" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="127" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="49" width="553" height="20" uuid="150e83bb-e4ac-41a3-b50c-10cca3e1a83b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Terra Rica - Paraná]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="69" width="555" height="20" uuid="0bb7ffee-a91d-4fee-901a-0fd2938c6135"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Telefone: (44) 3441-2210]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="29" width="555" height="20" uuid="2a126762-b0d4-4147-a904-564dedeac404"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Avenida Rio Grande do Sul ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="0" y="6" width="555" height="25" forecolor="#000000" uuid="27f043f8-7291-4cba-89a7-8ea387477ce4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidade de atenção Primaria de Saúde da Família]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Title" x="0" y="89" width="555" height="33" uuid="7035721f-a0e8-436a-8d58-4894c68a4e34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Relatório de Medicamento]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="551c1fd6-a433-4f98-8a00-a519490428d5"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="64" height="15" uuid="1fddd1fc-3f0d-48de-a851-5e4be134f747"/>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="64" y="19" width="247" height="15" uuid="7e4a5e66-9144-4090-8bfb-c7f0c05ffed7"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="311" y="19" width="103" height="15" uuid="3e1e8564-42d6-4077-8a5c-9e38f930df27"/>
+				<text><![CDATA[Controlado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="414" y="19" width="138" height="15" uuid="f4619ec2-7256-43cb-87dc-9429afeee0b2"/>
+				<text><![CDATA[Estoque]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="27ff5cf9-68ca-44d9-8040-d6dc49679367"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="64" height="15" uuid="9d5e36c7-b4c0-401a-8fbe-0c20028b3c33"/>
+				<textFieldExpression><![CDATA[$F{medicamento_medicamento_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="64" y="0" width="247" height="15" uuid="7cb80dce-0bca-4c1d-b17b-5b7a94266f16"/>
+				<textFieldExpression><![CDATA[$F{medicamento_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="311" y="0" width="103" height="15" uuid="735cb27f-17ee-46bc-8597-382a6ae51e67"/>
+				<textFieldExpression><![CDATA[$F{medicamento_controlado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="414" y="0" width="138" height="15" uuid="fa047f4b-a5c4-4d26-938e-877a65c32389"/>
+				<textFieldExpression><![CDATA[$F{medicamento_estoque}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="69b56e70-01ac-42dc-9732-3b4c0dbb2b64"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="8036f4d6-877d-4583-95e7-91a1e1167c55"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="0f06567f-197e-4a8e-a44c-164e9f623636"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="4362ca46-468a-41c4-a7d5-f83021ebb8fc"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+        <ui:define name="titulo">#{funcionarioControle.editando ? 'Edição de Funcionário' : 'Novo Funcionário'}</ui:define>
+        <ui:define name="corpo">
+
+            <h:form>
+                <h1>#{funcionarioControle.editando ? 'Edição de Funcionário' : 'Novo Funcionário'}</h1>
+
+                <p:toolbar style="margin-top: 20px">
+                    <p:toolbarGroup>
+                        <p:button value="Cancelar" outcome="/funcionario/pesquisa"  icon="ui-icon-close"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup>
+                        <p:button value="Pesquisa" outcome="/funcionario/pesquisa" icon="ui-icon-search"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup align="right">
+                        <p:commandButton value="Salvar"  action="#{funcionarioControle.salvar()}"
+                                         id="btsalvar" icon="ui-icon-disk" ajax="false"/>
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+
+                <p:panelGrid columns="4" id="painelFuncionario" style="width: 100%; margin-top: 20px">
+
+                    <p:outputLabel for="id" value="ID:"/>
+                    <p:inputText id="id"  value="#{funcionarioControle.funcionario.id}"
+                                 size="20" maxlength="20" disabled="true"/>
+
+                    <p:outputLabel for="nome" value="Nome:"/>
+                    <p:inputText id="nome"  size="80" maxlength="80" value="#{funcionarioControle.funcionario.nome}"
+                                 required="true" requiredMessage="O campo nome da Cidade é obrigatório"/>
+
+                    <p:outputLabel for="dataNascimento" value="Data Nascimento:"/>
+                    <p:calendar id="dataNascimento" value="#{funcionarioControle.funcionario.dataNascimento}"
+                                required="true" requiredMessage="O campo data de nascimento é obrigatório"
+                                pattern="dd/MM/yyyy"/>
+
+                    <p:outputLabel for="email" value="E-mail:"/>
+                    <p:inputText id="email"  size="80" maxlength="80" value="#{funcionarioControle.funcionario.email}"
+                                 required="true" requiredMessage="O campo email é obrigatório"/>
+
+                    <p:outputLabel for="endereco" value="Endereço:"/>
+                    <p:inputText id="endereco"  size="80" maxlength="80" value="#{funcionarioControle.funcionario.endereco}"
+                                 required="true" requiredMessage="O campo endereço é obrigatório"/>
+
+                    <p:outputLabel for="numero" value="numero:"/>
+                    <p:inputText id="numero"  size="80" maxlength="80" value="#{funcionarioControle.funcionario.numero}"
+                                 required="true" requiredMessage="O campo número é obrigatório"/>
+
+                    <p:outputLabel for="bairro" value="Bairro:"/>
+                    <p:inputText id="bairro"  size="80" maxlength="80" value="#{funcionarioControle.funcionario.bairro}"
+                                 required="true" requiredMessage="O campo bairro é obrigatório"/>
+
+                    <p:outputLabel for="complemento" value="Complemento:"/>
+                    <p:inputText id="complemento"  size="80" maxlength="80" value="#{funcionarioControle.funcionario.complemento}"/>
+                    
+                     <p:outputLabel for="fone" value="Telefone:" />
+                     <p:inputMask mask="(99) 9999-9999?9" id="fone" value="#{funcionarioControle.funcionario.telefone}"/>
+
+                    <p:outputLabel for="cidade" value="Cidade:"/>
+                    <p:autoComplete id="cidade" 
+                                    value="#{funcionarioControle.funcionario.cidade}"
+                                    completeMethod="#{cidadeControle.autoComplete}"
+                                    var="c"
+                                    itemLabel="#{c.nome}"
+                                    itemValue="#{c}"
+                                    converter="#{cidadeControle.converter()}"
+                                    queryDelay="500"
+                                    dropdown="true"
+                                    style="margin-right: 30px;"
+                                    required="true" requiredMessage="O campo cidade é obrigatório"/>
+                    
+                    <p:outputLabel for="dataAdmissao" value="Data Admissao:"/>
+                    <p:calendar id="dataAdmissao" value="#{funcionarioControle.funcionario.dataAdmissao}"
+                                required="true" requiredMessage="O campo data de admissão é obrigatório"
+                                pattern="dd/MM/yyyy"/>
+                    
+                    <p:outputLabel for="dataDemissao" value="Data Demissão:"/>
+                    <p:calendar id="dataDemissao" value="#{funcionarioControle.funcionario.dataDemissao}"
+                                pattern="dd/MM/yyyy"/>
+                    
+                     <p:outputLabel for="setor" value="Setor:"/>
+                     <p:selectOneMenu id="setor" value="#{funcionarioControle.funcionario.setor}"
+                                     required="true" requiredMessage="O campo setor é obrigatório">
+                         <f:selectItems value="#{funcionarioControle.setor}"
+                                       var="funcao"
+                                       itemLabel="#{funcao.descricao}"
+                                       itemValue="#{funcao}"/>
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel for="salario" value="Salário:"/>
+                    <p:inputText id="salario" value="#{funcionarioControle.funcionario.salario}">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                    </p:inputText>
+                                 
+
+
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+
+
+    </ui:composition>
+</html>

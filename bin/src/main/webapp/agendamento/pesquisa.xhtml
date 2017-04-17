@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+
+        <ui:define name="corpo">
+            <h:form id="form">
+                <h1>Pesquisa de Agendamentos</h1>
+
+                <p:toolbar style="margin-top: 20px">
+                    <p:toolbarGroup>
+                        <p:commandButton action="/Home.xhtml" value="Inicio" ajax="false"
+                                         icon="ui-icon-arrowrefresh-1-w"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup align="right">
+                        <p:commandButton  value="Adicionar" action="#{agendamentoControle.novo()}"
+                                          ajax="false" icon="ui-icon-document"/>
+                    </p:toolbarGroup>
+                </p:toolbar>
+                <p:messages  closable="true" severity="fatal,error" id="msgs" />
+
+
+                <p:dataTable   id="tabAgendamento" value="#{agendamentoControle.listaAgendamentos}" var="agendamento"  rows="10" paginator="true" 
+                               paginatorAlwaysVisible="false" paginatorPosition="botton" style="text-align: center" lazy="true">
+
+
+
+                    <p:column headerText="Id">
+                        <h:outputText value="#{agendamento.id}" />
+                    </p:column>
+                    <p:column headerText="Data">
+                        <h:outputText value="#{agendamento.data}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{agendamento.paciente.nome}" />
+                    </p:column>
+                     <p:column headerText="Tipo">
+                        <h:outputText value="#{agendamento.tipoAgenda}" />
+                    </p:column>
+                    
+
+
+                    <p:column headerText="Opções" style="text-align: center">
+                        <p:commandButton   actionListener="#{agendamentoControle.setAgendamento(agendamento)}"
+                                           action="cadastro?faces-redirect=true" ajax="false"  icon="ui-icon-pencil"/>
+                        <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{agendamentoControle.excluir(agendamento)}"
+                                         update=":form:tabAgendamento">
+                            <p:confirm header="Confirmação" message="Tem certeza que deseja remover?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+
+
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+        <ui:define name="titulo">#{saidaMedicamentoControle.editando ? 'Edição de saída de medimento' : 'Saída de medicamento'}</ui:define>
+        <ui:define name="corpo">
+
+            <h:form>
+                <h1>#{saidaMedicamentoControle.editando ? 'Edição de saída de medimento' : 'Saída de medicamento'}</h1>
+
+                <p:toolbar style="margin-top: 20px">
+                    <p:toolbarGroup>
+                        <p:button value="Cancelar" outcome="/saidaMedicamento/pesquisa"  icon="ui-icon-close"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup>
+                        <p:button value="Pesquisa" outcome="/saidaMedicamento/pesquisa" icon="ui-icon-search"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup align="right">
+                        <p:commandButton value="Salvar"  action="#{saidaMedicamentoControle.salvar()}"
+                                         id="btsalvar" icon="ui-icon-disk" ajax="false"/>
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+
+                <p:panelGrid columns="2" id="painelSaida" style="width: 100%; margin-top: 20px">
+
+                    <p:outputLabel for="id" value="ID:"/>
+                    <p:inputText id="id"  value="#{saidaMedicamentoControle.saidaMedicamento.id}"
+                                 size="20" maxlength="20" disabled="true"/>
+
+                    <p:outputLabel for="data" value="Data:"/>
+                    <p:calendar id="data" value="#{saidaMedicamentoControle.saidaMedicamento.dataSaida}"
+                                required="true" requiredMessage="O campo data é obrigatório"
+                                pattern="dd/MM/yyyy"/>
+
+                    <p:outputLabel for="observacao" value="Observação:"/>
+                    <p:inputText id="observacao"  size="80" maxlength="80" value="#{saidaMedicamentoControle.saidaMedicamento.observacao}"
+                                 required="true" requiredMessage="O campo observação é obrigatório"/>
+
+
+                </p:panelGrid>
+
+                <p:panelGrid id="painelItem" columns="5" style="width: 100%; margin-top: 20px">
+                    <p:outputLabel for="medicamento" value="Medicamento:"/>
+                     <p:autoComplete id="medicamento" 
+                                     value="#{saidaMedicamentoControle.itensSaida.medicamento}"
+                                     completeMethod="#{medicamentoControle.autoComplete}"
+                                    var="remedio"
+                                    itemLabel="#{remedio.nome}"
+                                    itemValue="#{remedio}"
+                                    converter="#{medicamentoControle.converter()}"
+                                    queryDelay="500"
+                                    dropdown="true"
+                                    style="margin-right: 30px;"/>
+                    
+                    
+                    <p:outputLabel for="quantidade" value="Quantidade:"/>
+                    <p:inputText id="quantidade" value="#{saidaMedicamentoControle.itensSaida.quantidade}">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                    </p:inputText>
+                    
+                    <p:commandButton value="Adicionar" process="painelItem"
+                                     actionListener="#{saidaMedicamentoControle.adiconaMedicamento()}"
+                                     update="itensVenda painelItem"/>
+                    
+                </p:panelGrid>
+                
+                <p:dataTable id="itensVenda" value="#{saidaMedicamentoControle.saidaMedicamento.itensSaidas}"
+                             var="item" emptyMessage="Nenhum medicamento adicionado.">
+                
+                    <p:column headerText="Medicamento">
+                        #{item.medicamento.nome}
+                    </p:column>
+                    <p:column headerText="Quantidade">
+                        <h:inputText value="#{item.quantidade}">
+                            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                        </h:inputText>
+                    </p:column>
+                    <p:column headerText="Opções">
+                        <p:commandButton value="Remover"
+                                         action="#{saidaMedicamentoControle.removeMedicamento()}"
+                                         actionListener="#{saidaMedicamentoControle.setItensSaida(item)}"
+                                         ajax="false"/>
+                    </p:column>
+                        
+                    
+                </p:dataTable>
+
+
+            </h:form>
+        </ui:define>
+
+
+    </ui:composition>
+</html>

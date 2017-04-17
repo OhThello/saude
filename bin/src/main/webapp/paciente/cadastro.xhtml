@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+        <ui:define name="titulo">#{pacienteControle.editando ? 'Edição de Paciente' : 'Novo Paciente'}</ui:define>
+        <ui:define name="corpo">
+
+            <h:form>
+                <h1>#{pacienteControle.editando ? 'Edição de Paciente' : 'Novo Paciente'}</h1>
+
+                <p:toolbar style="margin-top: 20px">
+                    <p:toolbarGroup>
+                        <p:button value="Cancelar" outcome="/paciente/pesquisa"  icon="ui-icon-close"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup>
+                        <p:button value="Pesquisa" outcome="/paciente/pesquisa" icon="ui-icon-search"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup align="right">
+                        <p:commandButton value="Salvar"  action="#{pacienteControle.salvar()}"
+                                         id="btsalvar" icon="ui-icon-disk" ajax="false"/>
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+
+                <p:panelGrid columns="2" id="painelPaciente" style="width: 100%; margin-top: 20px">
+
+                    <p:outputLabel for="id" value="ID:"/>
+                    <p:inputText id="id"  value="#{pacienteControle.paciente.id}"
+                                 size="20" maxlength="20" disabled="true"/>
+
+                    <p:outputLabel for="nome" value="Nome:"/>
+                    <p:inputText id="nome"  size="80" maxlength="80" value="#{pacienteControle.paciente.nome}"
+                                 required="true" requiredMessage="O campo nome da Cidade é obrigatório"/>
+
+                    <p:outputLabel for="dataNascimento" value="Data Nascimento:"/>
+                    <p:calendar id="dataNascimento" value="#{pacienteControle.paciente.dataNascimento}"
+                                required="true" requiredMessage="O campo data de nascimento é obrigatório"
+                                pattern="dd/MM/yyyy"/>
+
+                    <p:outputLabel for="email" value="E-mail:"/>
+                    <p:inputText id="email"  size="80" maxlength="80" value="#{pacienteControle.paciente.email}"
+                                 required="true" requiredMessage="O campo email é obrigatório"/>
+
+                    <p:outputLabel for="endereco" value="Endereço:"/>
+                    <p:inputText id="endereco"  size="80" maxlength="80" value="#{pacienteControle.paciente.endereco}"
+                                 required="true" requiredMessage="O campo endereço é obrigatório"/>
+
+                    <p:outputLabel for="numero" value="numero:"/>
+                    <p:inputText id="numero"  size="80" maxlength="80" value="#{pacienteControle.paciente.numero}"
+                                 required="true" requiredMessage="O campo número é obrigatório"/>
+
+                    <p:outputLabel for="bairro" value="Bairro:"/>
+                    <p:inputText id="bairro"  size="80" maxlength="80" value="#{pacienteControle.paciente.bairro}"
+                                 required="true" requiredMessage="O campo bairro é obrigatório"/>
+
+                    <p:outputLabel for="complemento" value="Complemento:"/>
+                    <p:inputText id="complemento"  size="80" maxlength="80" value="#{pacienteControle.paciente.complemento}"/>
+
+                    <p:outputLabel for="cidade" value="Cidade:"/>
+                    <p:autoComplete id="cidade" 
+                                    value="#{pacienteControle.paciente.cidade}"
+                                    completeMethod="#{cidadeControle.autoComplete}"
+                                    var="c"
+                                    itemLabel="#{c.nome}"
+                                    itemValue="#{c}"
+                                    converter="#{cidadeControle.converter()}"
+                                    queryDelay="500"
+                                    dropdown="true"
+                                    style="margin-right: 30px;"
+                                    required="true" requiredMessage="O campo cidade é obrigatório"/>
+
+                    <p:outputLabel for="nomeMae" value="Nome da mãe:"/>
+                    <p:inputText id="nomeMae"  size="80" maxlength="80" value="#{pacienteControle.paciente.nomeMae}"
+                                 required="true" requiredMessage="O campo nome da mãe é obrigatório"/>
+                    
+                     <p:outputLabel for="cartao" value="Cartão SUS:"/>
+                     <p:inputText id="cartao"  size="80" maxlength="80" value="#{pacienteControle.paciente.cartaoSus}"
+                                 required="true" requiredMessage="O campo cartão do SUS é obrigatório"/>
+                     
+                      <p:outputLabel for="protuario" value="Numero do Protuário:"/>
+                      <p:inputText id="protuario"  size="80" maxlength="80" value="#{pacienteControle.paciente.numeroProtuario}"
+                                 required="true" requiredMessage="O campo numero do protuario é obrigatório"/>
+
+
+
+
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+
+
+    </ui:composition>
+</html>
